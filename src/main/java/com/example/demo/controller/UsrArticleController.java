@@ -96,4 +96,17 @@ public class UsrArticleController {
 		
 		return id + "번 게시물을 삭제했습니다";
 	}
+	
+	@GetMapping("/usr/article/showDetail")
+	@ResponseBody
+	public Object showDetail(int id) {
+
+		Article foundArticle = getArticleById(id);
+
+		if (foundArticle == null) {
+			return id + "번 게시물은 존재하지 않습니다";
+		}
+
+		return foundArticle;
+	}
 }
