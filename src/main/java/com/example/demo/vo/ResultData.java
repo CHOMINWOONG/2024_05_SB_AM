@@ -6,7 +6,7 @@ public class ResultData {
 	private String resultMsg;
 	private Object Data;
 	
-public static ResultData from(String resultCode, String resultMsg) {
+	public static ResultData from(String resultCode, String resultMsg) {
 	
 		return from(resultCode, resultMsg, null);
 	}
@@ -27,4 +27,6 @@ public static ResultData from(String resultCode, String resultMsg) {
 	public boolean isFail() {
 		return isSuccess() == false;
 	}
+
+	
 }
