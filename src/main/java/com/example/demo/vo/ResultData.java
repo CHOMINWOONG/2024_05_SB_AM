@@ -1,24 +1,27 @@
 package com.example.demo.vo;
 
 import lombok.Data;
+import lombok.Getter;
 
 @Data
 public class ResultData<DT> {
+	@Getter
 	private String resultCode;
 	private String resultMsg;
-	private DT Data;
+	@Getter
+	private DT data;
 	
-	public static<DT> ResultData<DT> from(String resultCode, String resultMsg) {
+	public static <DT> ResultData<DT> from(String resultCode, String resultMsg) {
 	
 		return from(resultCode, resultMsg, null);
 	}
 
-	public static<DT> ResultData<DT> from(String resultCode, String resultMsg, DT Data) {
+	public static <DT> ResultData<DT> from(String resultCode, String resultMsg, DT data) {
 		
 		ResultData<DT> rd = new ResultData<>();
 		rd.resultCode = resultCode;
 		rd.resultMsg = resultMsg;
-		rd.Data = Data;
+		rd.data = data;
 		
 		return rd;
 	}
