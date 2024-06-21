@@ -22,7 +22,7 @@ public class UsrArticleController {
 	
 	@GetMapping("/usr/article/doWrite")
 	@ResponseBody
-	public ResultData doWrite(String title, String body) {
+	public ResultData<Article> doWrite(String title, String body) {
 		
 		if (Util.isEmpty(title)) {
 			return ResultData.from("F-1", "제목을 입력해주세요");
@@ -33,12 +33,12 @@ public class UsrArticleController {
 		
 		int id = articleService.getLastInsertId();
 		
-		return ResultData.from("S-1", String.format("%d번 게시물을 작성했습니다", id));
+		return ResultData.from("S-1", String.format("%d번 게시물을 작성했습니다", id), articleService.getArticleById(id));
 	}
 	
 	@GetMapping("/usr/article/showList")
 	@ResponseBody
-	public ResultData showList() {
+	public ResultData<List<Article>> showList() {
 
 		List<Article> articles = articleService.getArticles();
 
@@ -50,7 +50,7 @@ public class UsrArticleController {
 	
 	@GetMapping("/usr/article/showDetail")
 	@ResponseBody
-	public ResultData showDetail(int id) {
+	public ResultData<Article> showDetail(int id) {
 		
 		Article foundArticle = articleService.getArticleById(id);
 		

@@ -1,19 +1,21 @@
 package com.example.demo.vo;
 
-public class ResultData {
-	
+import lombok.Data;
+
+@Data
+public class ResultData<DT> {
 	private String resultCode;
 	private String resultMsg;
-	private Object Data;
+	private DT Data;
 	
-	public static ResultData from(String resultCode, String resultMsg) {
+	public static<DT> ResultData<DT> from(String resultCode, String resultMsg) {
 	
 		return from(resultCode, resultMsg, null);
 	}
 
-	public static ResultData from(String resultCode, String resultMsg, Object Data) {
+	public static<DT> ResultData<DT> from(String resultCode, String resultMsg, DT Data) {
 		
-		ResultData rd = new ResultData();
+		ResultData<DT> rd = new ResultData<>();
 		rd.resultCode = resultCode;
 		rd.resultMsg = resultMsg;
 		rd.Data = Data;
