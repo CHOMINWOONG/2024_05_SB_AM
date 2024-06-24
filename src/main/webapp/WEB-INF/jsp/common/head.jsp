@@ -16,18 +16,18 @@
 <link rel="stylesheet" href="/resource/common.css" />
 </head>
 <body>
-	<div>
-		<div><a href="/"><span>로고</span></a></div>
+	<div class="menu-con">
+		<div class="logo-bar grow"><a href="/"><span>로고</span></a></div>
 		
 		<ul>
-			<li><a href="/"><span>HOME</span></a></li>
-			<li><a href="/usr/article/list"><span>LIST</span></a></li>
+			<li class="hover:underline"><a href="/"><span>HOME</span></a></li>
+			<li class="hover:underline"><a href="/usr/article/list"><span>LIST</span></a></li>
 		</ul>
 	</div>
 	
 	<section>
-		<div>
-			<div>${pageTitle }&nbsp;PAGE</div>
+		<div class="text-3xl">
+			<div class="text-xl">${pageTitle }&nbsp;PAGE</div>
 		</div>
 	</section>
 </body>
