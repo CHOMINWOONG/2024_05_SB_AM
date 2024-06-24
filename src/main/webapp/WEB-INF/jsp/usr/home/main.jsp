@@ -1,26 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>¸ÞÀÎ</title>
-</head>
-<body>
-	<h1>¸ÞÀÎ ÆäÀÌÁö</h1>
-	
-	<div>
-		<div><a href="/">·Î°í</a></div>
-		
-		<ul>
-			<li><a href="/">HOME</a></li>
-			<li><a href="/usr/article/list">LIST</a></li>
-		</ul>
-	</div>
-	
-	<section>
-		<div>Lorem</div>
-		<div>¾È³çÇÏ¼¼¿ä</div>
-	</section>
-</body>
-</html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
+<c:set var="pageTitle" value="MAIN"/>
+
+<%@ include file="../../common/head.jsp" %>
+
+<section>
+	<div>Lorem</div>
+	<div>ì•ˆë…•í•˜ì„¸ìš”</div>
+</section>
+
+ <%@ include file="../../common/foot.jsp" %>
