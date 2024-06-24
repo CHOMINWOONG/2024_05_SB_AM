@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -46,16 +48,14 @@ public class UsrArticleController {
 		
 	}
 	
-	@GetMapping("/usr/article/showList")
-	@ResponseBody
-	public ResultData<List<Article>> showList() {
+	@GetMapping("/usr/article/list")
+	public String showList(Model model) {
 
 		List<Article> articles = articleService.getArticles();
-
-		if (articles.size() == 0) {
-			return ResultData.from("F-1", "게시물이 존재하지 않습니다");
-		}
-		return ResultData.from("S-1", "게시물 목록", articles);
+		
+		model.addAttribute("articles", articles);
+		
+		return "usr/article/list";
 	}
 	
 	@GetMapping("/usr/article/showDetail")
