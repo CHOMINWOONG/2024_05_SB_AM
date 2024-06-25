@@ -58,39 +58,45 @@ public class UsrArticleController {
 		return "usr/article/list";
 	}
 	
-	@GetMapping("/usr/article/showDetail")
-	@ResponseBody
-	public ResultData<Article> showDetail(int id) {
+	@GetMapping("/usr/article/detail")
+	public String showDetail(HttpSession session, Model model, int id) {
 		
-		Article foundArticle = articleService.getArticleById(id);
+		int loginedMemberId = 0;
 		
-		if (foundArticle == null) {
-			return ResultData.from("F-1", String.format("%d번 게시물이 존재하지 않습니다.", id));
+		if (session.getAttribute("loginedMemberId") != null) {
+			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 		}
 		
-		return ResultData.from("S-1", String.format("%d번 게시물 상세보기", id), foundArticle);
+		Article article = articleService.getArticleById(id);
+		
+		model.addAttribute("article", article);
+		model.addAttribute("loginedMemberId", loginedMemberId);
+		return "usr/article/detail";
 	}
 	
-	@GetMapping("/usr/article/doModify")
-	@ResponseBody
-	public ResultData doModify(HttpSession session, int id, String title, String body) {
+	@GetMapping("/usr/article/modify")
+	public String doModify(Model model, HttpSession session, int id, String title, String body) {
+		
+		List<Article> articles = articleService.getArticles();
+		
+		model.addAttribute("articles", articles);
 		
 		Article foundArticle = articleService.getArticleById(id);
 		
 		if (foundArticle == null) {
-			return ResultData.from("F-1", String.format("%번 게시물이 존재하지 않습니다.", id));
+			return "usr/article/list";
 		}
 		
 		if (foundArticle.getMemberId() != (int) session.getAttribute("loginedMemberId")) {
-			return ResultData.from("F-M", "해당 게시물에 권한이 없습니다.");
+			return "usr/article/list";
 		}
 		
 		articleService.modifyArticle(id, title, body);
 		
-		return ResultData.from("S-1", String.format("%번 게시물을 수정하였습니다", id));
+		return "usr/article/modify";
 	}
 	
-	@GetMapping("/usr/article/doDelete")
+	@GetMapping("/usr/article/delete")
 	@ResponseBody
 	public ResultData doDelete(HttpSession session, int id) {
 		

@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="ARTICLE LIST" />
-
 <%@ include file="../../common/head.jsp" %>
-	<section class="mt-8 text-lg">
-		<div class="container mx-auto px-3">
+	<section>
+		<div>
 			<div class="table-box-type">
 				<table>
 					<thead>
@@ -18,16 +17,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="article" items="${articles }">
+						<c:forEach var="article" items="${articles}" >
 							<tr>
-								<td>${article.id }</td>
-								<td class="hover:underline"><a href="detail?id=${article.id }">${article.title }</a></td>
-								<td>${article.writerName }</td>
-								<td>${article.updateDate.substring(2, 16) }</td>
+								<th>${article.id }</th>
+								<th>${article.title }</th>
+								<th>${article.memberId }</th>
+								<th>${article.updateDate }</th>
 							</tr>
 						</c:forEach>
 					</tbody>
-				</table>
+				</table>	
 			</div>
 		</div>
 	</section>

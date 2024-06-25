@@ -9,26 +9,27 @@
 <!-- 테일윈드 -->
 <script src="https://cdn.tailwindcss.com"></script>
 <!-- 폰트어썸 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></script>
+<link src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></link>
 <!-- 제이쿼리 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!-- 공통 css -->
 <link rel="stylesheet" href="/resource/common.css" />
 </head>
 <body>
-	<div class="menu-con">
-		<div class="logo-bar grow"><a href="/"><span>로고</span></a></div>
-		
-		<ul>
-			<li class="hover:underline"><a href="/"><span>HOME</span></a></li>
-			<li class="hover:underline"><a href="/usr/article/list"><span>LIST</span></a></li>
+	<div class="h-20 flex container mx-auto text-3xl">
+		<div><a class="h-full px-3 flex items-center bg-cyan-400 rounded-xl hover:underline" href="/"><span>로고</span></a></div>
+		<div class="grow"></div>
+		<ul class="flex">
+			<li class="bg-cyan-400 rounded-xl hover:underline"><a class="h-full py-1.5 px-2 flex items-center" href="/"><span>HOME</span></a></li>
+			<li class="bg-cyan-400 rounded-xl hover:underline"><a class="h-full py-1.5 px-2 flex items-center" href="/usr/article/list"><span>LIST</span></a></li>
 		</ul>
 	</div>
 	
 	<section>
-		<div class="text-3xl">
-			<div class="text-xl">${pageTitle }&nbsp;PAGE</div>
+		<div class="container mx-auto px-3">
+			<div class="container text-xl">${pageTitle }&nbsp;PAGE</div>
 		</div>
 	</section>
+	
 </body>
 </html>

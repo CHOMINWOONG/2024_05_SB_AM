@@ -7,9 +7,11 @@
 
 <%@ include file="../../common/head.jsp" %>
 
-<section class="main-con">
-	<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut rem incidunt perspiciatis quibusdam saepe doloribus quae maiores veritatis nulla aliquid harum ipsam asperiores. Hic quod alias sed obcaecati repellendus saepe.</div>
-	<div>안녕하세요</div>
-</section>
+	<section class="mt-8">
+		<div class="container mx-auto">
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore facilis cum aut facere numquam magni itaque. Repellendus quibusdam maiores tenetur autem repellat consectetur minus nobis aut soluta tempora architecto natus?</div>
+			<div>안녕하세요</div>
+		</div>
+	</section>
 
  <%@ include file="../../common/foot.jsp" %>
