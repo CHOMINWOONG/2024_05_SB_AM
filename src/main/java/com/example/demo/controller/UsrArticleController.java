@@ -12,7 +12,9 @@ import com.example.demo.service.ArticleService;
 import com.example.demo.util.Util;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.ResultData;
+import com.example.demo.vo.Rq;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -59,18 +61,14 @@ public class UsrArticleController {
 	}
 	
 	@GetMapping("/usr/article/detail")
-	public String showDetail(HttpSession session, Model model, int id) {
+	public String showDetail(HttpServletRequest req, Model model, int id) {
 		
-		int loginedMemberId = 0;
-		
-		if (session.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-		}
+		Rq rq = (Rq) req.getAttribute("rq");
 		
 		Article article = articleService.getArticleById(id);
 		
 		model.addAttribute("article", article);
-		model.addAttribute("loginedMemberId", loginedMemberId);
+		model.addAttribute("loginedMemberId", rq.getLoginedMemberId());
 		return "usr/article/detail";
 	}
 	
@@ -98,21 +96,13 @@ public class UsrArticleController {
 	
 	@GetMapping("/usr/article/delete")
 	@ResponseBody
-	public ResultData doDelete(HttpSession session, int id) {
+	public String doDelete(int id) {
 		
-		Article foundArticle = articleService.getArticleById(id);
+		Article article = articleService.getArticleById(id);
 		
-		if (foundArticle == null) {
-			return ResultData.from("F-1", String.format("번 게시물은 존재하지 않습니다", id));
-		}
-		
-		if (foundArticle.getMemberId() != (int) session.getAttribute("loginedMemberId")) {
-			return ResultData.from("F-D", "해당 게시물에 권한이 없습니다.");
-			
-		}
 		
 		articleService.deleteArticle(id);
 		
-		return ResultData.from("S-1", String.format("%d번 게시물을 삭제했습니다", id));
+		return Util.jsReplace(String.format("%s번 게시물을 삭제했습니다.", id), "list");
 	}
 }
