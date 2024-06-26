@@ -30,21 +30,28 @@
 	<section class="mt-8 text-lg">
 		<div class="container mx-auto px-3">
 			<form action="doLogin" method="post" onsubmit="loginForm_onSubmit(this); return false;">
-				<div class="table-box-type">
-					<table>
-						<tr>
-							<th>아이디</th>
-							<td><input class="w-96" type="text" name="loginId" placeholder="아이디를 입력해주세요" /></td>
-						</tr>
-						<tr>
-							<th>비밀번호</th>
-							<td><input class="w-96" type="text" name="loginPw" placeholder="비밀번호를 입력해주세요" /></td>
-						</tr>
-						<tr>
-							<td colspan="2"><div class="btns"><button>로그인</button></div></td>
-						</tr>
-					</table>
-				</div>
+				<div class="form-control">
+		          	<label class="label">
+		            	<span class="label-text">아이디</span>
+		          	</label>
+		          	<input type="text" placeholder="아이디를 입력해주세요" class="input input-bordered" required />
+		        </div>
+		        
+		        <div class="form-control">
+		         	 <label class="label">
+		            	<span class="label-text">비밀번호</span>
+		          	</label>
+		          	
+		          	<input type="password" placeholder="비밀번호를 입력해주세요" class="input input-bordered" required />
+		          	
+		          	<label class="label">
+		            	<a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+		          	</label>		 
+		        </div>
+		        
+		        <div class="form-control mt-6">
+		          	<button class="btn btn-primary">Login</button>
+		        </div>
 			</form>
 			<div class="btns mt-3 text-sm">
 				<button onclick="history.back();">뒤로가기</button>
@@ -52,3 +59,4 @@
 		</div>
 	</section>
 <%@ include file="../../common/foot.jsp" %>
+

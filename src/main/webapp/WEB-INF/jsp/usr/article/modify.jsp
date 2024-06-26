@@ -10,21 +10,19 @@
 				<table>
 					<thead>
 						<tr>
-							<th>번호</th>
 							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
+							<td>${article.title }</td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td></td>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="article" items="${articles}" >
 							<tr>
-								<th>${article.id }</th>
 								<th>${article.title }</th>
-								<th>${article.memberId }</th>
-								<th>${article.updateDate }</th>
+								<th>${article.body }</th>
 							</tr>
-						</c:forEach>
 					</tbody>
 				</table>	
 			</div>
