@@ -31,6 +31,26 @@
 				<form action="doWrite" method="post" onsubmit="writeForm_onSubmit(this); return false;">
 					<input type="hidden" name="id" value="${article.id }" />
 					<div class="table-box-type">
+						<tr>
+							<th>게시판</th>
+								<td>
+									<div class="flex">
+										<div>
+											<label class="flex items-center">
+												<input class="radio radio-sm" type="radio" name="boardId" value="1" checked />
+												&nbsp;&nbsp;공지사항
+											</label>
+										</div>
+										<div class="w-20"></div>
+										<div>
+											<label class="flex items-center">
+												<input class="radio radio-sm" type="radio" name="boardId" value="2" />
+												&nbsp;&nbsp;자유
+											</label>
+										</div>
+									</div>
+								</td>
+							</tr>
 						<div class="form-control">
 			          			<label class="label">
 			            			<span class="label-text">제목</span>
