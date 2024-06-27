@@ -12,12 +12,17 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class NeedLoginInterceptor implements HandlerInterceptor {
+	
+	private Rq rq;
+
+	public NeedLoginInterceptor(Rq rq) {
+		this.rq = rq;
+	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
-		Rq rq = (Rq) request.getAttribute("rq");
 		
 		if (rq.getLoginedMemberId() == 0) {
 			

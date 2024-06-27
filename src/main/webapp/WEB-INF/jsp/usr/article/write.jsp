@@ -55,13 +55,13 @@
 			          			<label class="label">
 			            			<span class="label-text">제목</span>
 			          			</label>
-			          	<input type="text" placeholder="제목을 입력해주세요" class="input input-bordered" required />
+			          	<input type="text" name="title" placeholder="제목을 입력해주세요" class="input input-bordered" required />
 			       		</div>	
 			       		<div class="form-control">
 			          		<label class="label">
 			            		<span class="label-text">내용</span>
 			          		</label>
-		          		<input type="text" placeholder="내용을 입력해주세요" class="input input-bordered" required />
+		          		<input type="text" name="body" placeholder="내용을 입력해주세요" class="input input-bordered" required />
 		       			</div>
 					</div>
 					
