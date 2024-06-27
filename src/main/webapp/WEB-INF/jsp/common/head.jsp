@@ -35,7 +35,8 @@
           d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
       </svg>
     </a></li>
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list"><span>LIST</span></a></li>
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=1"><span>NOTICE</span></a></li>
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=2"><span>FREE</span></a></li>
 			<c:if test="${rq.getLoginedMemberId() == 0 }">
 				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>LOGIN</span></a></li>
 			</c:if>
@@ -76,6 +77,6 @@
 	
 	<section class="my-3 text-2xl">
 		<div class="container mx-auto px-3">
-			<div>${pageTitle }&nbsp;PAGE</div>
+			<div>${pageTitle }</div>
 		</div>
 	</section>

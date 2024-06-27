@@ -35,7 +35,7 @@
 			<div class="btns mt-3 text-sm">
 				<button class="btn btn-outline btn-accent btn-sm" onclick="history.back();">뒤로가기</button>
 				
-				<c:if test="${loginedMemberId == article.memberId }">
+				<c:if test="${rq.getLoginedMemberId() == article.memberId }">
 					<a href="modify?id=${article.id }">수정</a>
 					<a href="doDelete?id=${article.id }" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
 				</c:if>

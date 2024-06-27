@@ -2,7 +2,6 @@ package com.example.demo.dao;
 
 import java.util.List;
 
-
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -29,9 +28,10 @@ public interface ArticleDao {
 				FROM article A
 				INNER JOIN `member` M
 				ON A.memberId = M.id
+				WHERE A.boardId = #{boardId}
 				ORDER BY A.id DESC
 			""")
-	public List<Article> getArticles();
+	public List<Article> getArticles(int boardId);
 	
 	@Select("""
 			SELECT A.*, M.nickname `writerName`
@@ -53,12 +53,8 @@ public interface ArticleDao {
 			<script>
 			UPDATE article
 				SET updateDate = NOW()
-					<if test="title != null and title != ''">
-						, title = #{title}
-					</if>
-					<if test="body != null and body != ''">
-						, `body` = #{body}
-					</if>
+					, title = #{title}
+					, `body` = #{body}
 				WHERE id = #{id}
 			</script>
 			""")
@@ -73,5 +69,11 @@ public interface ArticleDao {
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
 
-	
+	@Select("""
+			SELECT `name`
+				FROM board
+				WHERE id = #{boardId}
+			""")
+	public String getBoardNameById(int boardId);
+
 }

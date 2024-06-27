@@ -34,7 +34,7 @@
 		          	<label class="label">
 		            	<span class="label-text">아이디</span>
 		          	</label>
-		          	<input type="text" placeholder="아이디를 입력해주세요" class="input input-bordered" required />
+		          	<input type="text" name="loginId" placeholder="아이디를 입력해주세요" class="input input-bordered" required />
 		        </div>
 		        
 		        <div class="form-control">
@@ -42,7 +42,7 @@
 		            	<span class="label-text">비밀번호</span>
 		          	</label>
 		          	
-		          	<input type="password" placeholder="비밀번호를 입력해주세요" class="input input-bordered" required />
+		          	<input type="password" name="loginPw" placeholder="비밀번호를 입력해주세요" class="input input-bordered" required />
 		          	
 		          	<label class="label">
 		            	<a href="#" class="label-text-alt link link-hover">Forgot password?</a>
