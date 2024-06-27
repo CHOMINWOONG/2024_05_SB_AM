@@ -50,11 +50,15 @@ public class UsrArticleController {
 	@GetMapping("/usr/article/list")
 	public String list(Model model, int boardId) {
 		
+		int articlesCnt = articleService.getArticlesCnt(boardId);
+		
 		String boardName = articleService.getBoardNameById(boardId);
 		
 		List<Article> articles = articleService.getArticles(boardId);
 		
+		model.addAttribute("boardName", boardName);
 		model.addAttribute("articles", articles);
+		model.addAttribute("articlesCnt", articlesCnt);
 		
 		return "usr/article/list";
 	}

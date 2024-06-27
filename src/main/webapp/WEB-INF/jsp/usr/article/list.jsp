@@ -7,6 +7,10 @@
 <%@ include file="../../common/head.jsp" %>
 	<section class="mt-8 text-lg">
 		<div class="container mx-auto px-3">
+			<div class="text-sm">
+				<div><span>총 : ${articlesCnt }개</span></div>
+			</div>
+		
 			<div class="table-box-type">
 				<table>
 					<thead>
