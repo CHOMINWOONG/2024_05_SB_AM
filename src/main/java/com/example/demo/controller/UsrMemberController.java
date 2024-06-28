@@ -91,9 +91,7 @@ public class UsrMemberController {
 
 	@GetMapping("/usr/member/doLogout")
 	@ResponseBody
-	public String doLogout(HttpServletRequest req) {
-
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String doLogout() {
 		
 		rq.logout();
 

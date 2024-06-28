@@ -24,10 +24,7 @@ public class NeedLogoutInterceptor implements HandlerInterceptor {
 
 		
 		if (rq.getLoginedMemberId() != 0) {
-			
-			rq.jsPrintReplace("로그아웃 후 이용해주세요", "/usr/member/doLogout");
-			response.getWriter().append(Util.jsReplace("로그인 후 이용해주세요", "/"));
-			
+			rq.jsPrintReplace("로그아웃 후 이용해주세요", "/");
 			return false;
 		}
 

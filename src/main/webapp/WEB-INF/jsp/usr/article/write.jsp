@@ -51,6 +51,7 @@
 									</div>
 								</td>
 							</tr>
+							
 						<div class="form-control">
 			          			<label class="label">
 			            			<span class="label-text">제목</span>

@@ -25,10 +25,7 @@ public class NeedLoginInterceptor implements HandlerInterceptor {
 
 		
 		if (rq.getLoginedMemberId() == 0) {
-			
-			response.setContentType("text/html; charset=UTF-8;");
-			response.getWriter().append(Util.jsReplace("로그인 후 이용해주세요", "/"));
-			
+			rq.jsPrintReplace("로그인 후 이용해주세요", "/");
 			return false;
 		}
 

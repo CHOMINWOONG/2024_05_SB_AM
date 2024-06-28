@@ -2,20 +2,17 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.ArticleService;
 import com.example.demo.util.Util;
 import com.example.demo.vo.Article;
-import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UsrArticleController {
@@ -30,11 +27,10 @@ public class UsrArticleController {
 	
 	@GetMapping("/usr/article/write")
 	public String write() {
-		
 		return "usr/article/write";
 	}
 	
-	@GetMapping("/usr/article/doWrite")
+	@PostMapping("/usr/article/doWrite")
 	@ResponseBody
 	public String doWrite(int boardId, String title, String body) {
 		
@@ -43,66 +39,75 @@ public class UsrArticleController {
 		int id = articleService.getLastInsertId();
 		
 		return Util.jsReplace(String.format("%d번 게시물을 작성했습니다", id), String.format("detail?id=%d", id));
-		
 	}
 	
 	@GetMapping("/usr/article/list")
-	public String list(Model model, int boardId) {
-		
-		int articlesCnt = articleService.getArticlesCnt(boardId);
+	public String list(Model model, int boardId, @RequestParam(defaultValue = "1") int cPage) {
 		
 		String boardName = articleService.getBoardNameById(boardId);
 		
-		List<Article> articles = articleService.getArticles(boardId);
+		int articlesCnt = articleService.getArticlesCnt(boardId);
 		
+		int itemsInAPage = 10;
+		int limitFrom = (cPage - 1) * itemsInAPage;
+
+		List<Article> articles = articleService.getArticles(boardId, limitFrom, itemsInAPage);
+
+		int from = ((cPage - 1) / 10) * 10 + 1;
+		int end =  (((cPage - 1) / 10) + 1) * 10;
+
+		int totalPageCnt = (int) Math.ceil((double) articlesCnt / itemsInAPage);
+
+		if (end > totalPageCnt) {
+			end = totalPageCnt;
+		}
+
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("from", from);
+		model.addAttribute("end", end);
+		model.addAttribute("totalPageCnt", totalPageCnt);
 		model.addAttribute("boardName", boardName);
-		model.addAttribute("articles", articles);
 		model.addAttribute("articlesCnt", articlesCnt);
+		model.addAttribute("articles", articles);
 		
 		return "usr/article/list";
 	}
 	
 	@GetMapping("/usr/article/detail")
-	public String detail(HttpServletRequest req, Model model, int id) {
+	public String detail(Model model, int id) {
 		
-		Rq rq = (Rq) req.getAttribute("rq");
-		
-		Article article = articleService.getArticleById(id);
+		Article article = articleService.forPrintArticle(id);
 		
 		model.addAttribute("article", article);
-		model.addAttribute("loginedMemberId", rq.getLoginedMemberId());
+		
 		return "usr/article/detail";
 	}
 	
 	@GetMapping("/usr/article/modify")
-	public String modify(HttpServletRequest req, Model model, int id) {
+	public String modify(Model model, int id) {
 		
-		Rq rq = (Rq) req.getAttribute("rq");
+		Article article = articleService.forPrintArticle(id);
 		
-		Article article = articleService.getArticleById(id);
-		
-		model.addAttribute("loginedMemberId", rq.getLoginedMemberId());
+		model.addAttribute("article", article);
 		
 		return "usr/article/modify";
 	}
 	
-	@GetMapping("/usr/article/doModify")
+	@PostMapping("/usr/article/doModify")
+	@ResponseBody
 	public String doModify(int id, String title, String body) {
 		
 		articleService.modifyArticle(id, title, body);
 		
-		return Util.jsReplace(String.format("%s번 게시물을 수정했습니다.", id), String.format("detail?id=%d", id));
+		return Util.jsReplace(String.format("%d번 게시물을 수정했습니다", id), String.format("detail?id=%d", id));
 	}
 	
-	@GetMapping("/usr/article/delete")
+	@GetMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String delete(int id) {
-		
-		Article article = articleService.getArticleById(id);
-		
+	public String doDelete(int id) {
 		
 		articleService.deleteArticle(id);
 		
-		return Util.jsReplace(String.format("%s번 게시물을 삭제했습니다.", id), "list");
+		return Util.jsReplace(String.format("%d번 게시물을 삭제했습니다", id), "list");
 	}
 }
