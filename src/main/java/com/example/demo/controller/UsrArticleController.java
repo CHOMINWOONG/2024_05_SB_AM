@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,10 @@ import com.example.demo.service.ArticleService;
 import com.example.demo.util.Util;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.Rq;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class UsrArticleController {
@@ -76,7 +81,27 @@ public class UsrArticleController {
 	}
 	
 	@GetMapping("/usr/article/detail")
-	public String detail(Model model, int id) {
+	public String detail(HttpServletRequest req, HttpServletResponse resp, Model model, int id) {
+		Cookie[] cookies = req.getCookies();
+		boolean isViewed = false;
+		
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("viewedArticle_" + id)) {
+					isViewed = true;
+					break;
+				}
+			}
+		}
+		
+		if (!isViewed) {
+			articleService.increaseView(id);
+			Cookie cookie = new Cookie("viewedArticle_" + id, "true");
+			cookie.setMaxAge(60 * 30);
+			resp.addCookie(cookie);
+		}
+		
+		articleService.increaseView(id);
 		
 		Article article = articleService.forPrintArticle(id);
 		

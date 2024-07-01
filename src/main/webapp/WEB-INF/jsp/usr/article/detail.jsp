@@ -14,6 +14,10 @@
 						<td>${article.id }</td>
 					</tr>
 					<tr>
+						<th>조회수</th>
+						<td>${article.views }</td>
+					</tr>
+					<tr>
 						<th>작성일</th>
 						<td>${article.updateDate.substring(2, 16) }</td>
 					</tr>
