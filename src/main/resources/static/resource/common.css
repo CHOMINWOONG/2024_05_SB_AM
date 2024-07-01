@@ -14,22 +14,23 @@ html > body {
 
 .table-box-type > table {
 	width: 100%;
-	border-collapse: collapse; /* 테이블의 셀 간격을 제거합니다 */
+	border-collapse: collapse; 
 }
 
 
 
 .table-box-type > table th, .table-box-type > table td {
-	border-left: none; /* 셀의 왼쪽 테두리를 제거합니다 */
-    border-right: none; /* 셀의 오른쪽 테두리를 제거합니다 */
-    border-top: 1px solid #ddd; /* 셀의 위쪽 테두리를 설정합니다 */
-    border-bottom: 1px solid #ddd; /* 셀의 아래쪽 테두리를 설정합니다 */
+	border-left: none; 
+    border-right: none; 
+    border-top: 1px solid #ddd; 
+    border-bottom: 1px solid #ddd; 
 	padding: 10px;
 	text-align: center;
-	
+	background-color: #2cbff5;
 }
 
 .table-box-type > table th {
 	border-top: 3px solid #ddd;
-	border-bottom: 3px solid #ddd; /* 셀의 아래쪽 테두리를 설정합니다 */
+	border-bottom: 3px solid #ddd; 
+	background-color: #3492eb;
 }

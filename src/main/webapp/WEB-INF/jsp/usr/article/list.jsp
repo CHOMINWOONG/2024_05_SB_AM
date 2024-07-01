@@ -9,8 +9,34 @@
 		<div class="container mx-auto px-3">
 			<div class="text-sm">
 				<div><span>총 : ${articlesCnt }개</span></div>
-			</div>
-		
+				
+				
+					<form>
+						<div class="flex justify-end mb-4">
+							<select data-value="${param.searchKeywordType }" class="select select-bordered select-sm" name="searchKeywordType">
+							<option value="title">제목</option>
+							<option value="body">내용</option>
+							<option value="title,body">제목 + 내용</option>
+						</select>
+							
+							<label class="input input-bordered flex items-center gap-2 input-sm ml-2">
+							<input name="searchKeyword" type="text" class="grow" placeholder="Search" value="${param.searchKeyword }"/>
+								<svg
+								    xmlns="http://www.w3.org/2000/svg"
+								    viewBox="0 0 16 16"
+								    fill="currentColor"
+								    class="h-4 w-4 opacity-70">
+							    <path
+								    fill-rule="evenodd"
+								    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+								    clip-rule="evenodd" />
+							    </svg>
+							</label>
+							
+							<button class="hidden">검색</button>
+						</div>
+					</form>
+				</div>
 			<div class="table-box-type">
 				<table>
 					<thead>
@@ -42,19 +68,21 @@
 			
 			<div class="mt-3 flex justify-center">
 				<div class="join">
-
+				
+					<c:set var="baseUri" value="boardId=${param.boardId }&searchKeywordType=${param.searchKeywordType }&searchKeyword=${param.searchKeyword }" />
+					
 					<c:if test="${from != 1 }">
-						<a class="join-item btn btn-sm" href="?boardId=${param.boardId }&cPage=1"><i class="fa-solid fa-angles-left"></i></a>
-						<a class="join-item btn btn-sm" href="?boardId=${param.boardId }&cPage=${from - 1 }"><i class="fa-solid fa-caret-left"></i></a>
+						<a class="join-item btn btn-sm" href="?cPage=1&${baseUri }"><i class="fa-solid fa-angles-left"></i></a>
+						<a class="join-item btn btn-sm" href="?cPage=${from - 1 }&${baseUri }"><i class="fa-solid fa-caret-left"></i></a>
 					</c:if>
-
+					
 					<c:forEach begin="${from }" end="${end }" var="i">
-						<a class="join-item btn btn-sm ${cPage == i ? 'btn-active' : '' }" href="?boardId=${param.boardId }&cPage=${i }">${i }</a>
+						<a class="join-item btn btn-sm ${cPage == i ? 'btn-active' : '' }" href="?cPage=${i }&${baseUri }">${i }</a>
 					</c:forEach>
-
+					
 					<c:if test="${end != totalPageCnt }">
-						<a class="join-item btn btn-sm" href="?boardId=${param.boardId }&cPage=${end + 1 }"><i class="fa-solid fa-caret-right"></i></a>
-						<a class="join-item btn btn-sm" href="?boardId=${param.boardId }&cPage=${totalPageCnt }"><i class="fa-solid fa-angles-right"></i></a>
+						<a class="join-item btn btn-sm" href="?cPage=${end + 1 }&${baseUri }"><i class="fa-solid fa-caret-right"></i></a>
+						<a class="join-item btn btn-sm" href="?cPage=${totalPageCnt }&${baseUri }"><i class="fa-solid fa-angles-right"></i></a>
 					</c:if>
 				</div>
 			</div>

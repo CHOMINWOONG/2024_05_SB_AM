@@ -66,15 +66,10 @@
 		       			</div>
 					</div>
 					
+					<div class="mt-3 text-sm">
+						<button class="btn btn-active btn-sm" onclick="history.back();">뒤로가기</button>
+					</div>
 				</form>
-			
-				<div class="form-control mt-6">
-			    	<button class="btn btn-primary">작성</button>
-			    </div>
-		    
-				<div class="mt-3 text-sm">
-					<button class="btn btn-active btn-sm" onclick="history.back();">뒤로가기</button>
-				</div>
 			</div>
 		</section>
 <%@ include file="../../common/foot.jsp" %>
