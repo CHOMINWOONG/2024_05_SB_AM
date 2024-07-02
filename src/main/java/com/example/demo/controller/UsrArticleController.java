@@ -101,7 +101,6 @@ public class UsrArticleController {
 			resp.addCookie(cookie);
 		}
 		
-		articleService.increaseView(id);
 		
 		Article article = articleService.forPrintArticle(id);
 		
