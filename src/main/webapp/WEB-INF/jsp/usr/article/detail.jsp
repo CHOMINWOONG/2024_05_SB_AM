@@ -123,6 +123,31 @@
 					<a href="doDelete?id=${article.id }" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
 				</c:if>
 			</div>
+			<section>
+				<div class="container">
+					<div>댓글</div>
+					
+					<c:forEach var="reply" items="${replies }">
+						<div>
+							<div>${reply.writerName }</div>
+							<div>${reply.body }</div>
+							<div>${reply.updateDate }</div>
+						</div>
+					</c:forEach>
+					
+					<c:if test="${rq.getLoginedMemberId() != 0}">
+						<form action="../reply/doWrite" method="post" onsubmit="replyForm_onSubmit(this); return false;">
+							<input type="hidden" name="relTypeCode" value="article"/>
+							<input type="hidden" name="relId" value="${article.id }"/>
+							<div class="mt-4 reply-border p-4">
+								<div class="mb-2"><span>닉네임</span></div>
+								<textarea class="textarea textarea-bordered textarea-lg w-full" name="body" placeholder="댓글을 입력해보세요"></textarea>
+								<div class="flex justify-end"><button class="btn btn-active btn-sm">작성</button></div>
+							</div>
+						</form>
+					</c:if>
+				</div>
+			</section>
 		</div>
 	</section>
 <%@ include file="../../common/foot.jsp" %>
