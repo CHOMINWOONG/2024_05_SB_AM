@@ -37,5 +37,18 @@ public interface ReplyDao {
 				AND R.relId = #{relId}
 			""")
 	public List<Reply> getReplies(String relTypeCode, int relId);
+
+	@Update("""
+			UPDATE reply
+				SET updateDate = NOW()
+					, `body` = #{body}
+				WHERE id = #{id}
+			""")
+	public void modifyReply(int loginedMemberId, String relTypeCode, int relId, String body);
 	
+	@Delete("""
+			DELETE FROM reply
+				WHERE id = #{id}
+			""")
+	public void deleteReply(int id, int relId);
 }

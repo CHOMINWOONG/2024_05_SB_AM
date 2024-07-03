@@ -8,6 +8,10 @@
 
 	<script>
 		$(document).ready(function(){
+			
+			if (${rq.getLoginedMemberId() != 0 }) {
+				getNickname();
+			}
 			getLikePoint();
 			
 			$('#likePointBtn').click(async function(){
@@ -48,6 +52,20 @@
 					} else {
 						$('#likePointBtn').removeClass('btn-active');
 					}
+				},
+				error : function(xhr, status, error) {
+					console.log(error);
+				}
+			})
+		}
+		
+		const getMemberById = async function(){
+			return $.ajax({
+				url : '../member/getMemberById',
+				type : 'GET',
+				dataType : 'json',
+				success : function(data) {
+					$('#replyNickname').html(data);
 				},
 				error : function(xhr, status, error) {
 					console.log(error);
@@ -109,7 +127,7 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td>${article.body }</td>
+						<td>${article.getForPrintBody() }</td>
 					</tr>
 					
 				</table>
@@ -124,14 +142,24 @@
 				</c:if>
 			</div>
 			<section>
-				<div class="container">
+				<div class="container ">
 					<div>댓글</div>
 					
-					<c:forEach var="reply" items="${replies }">
-						<div>
-							<div>${reply.writerName }</div>
-							<div>${reply.body }</div>
-							<div>${reply.updateDate }</div>
+					<c:forEach var="reply" items="${replies}">
+					
+						<div style="display: flex; align-items: center; margin-bottom: 10px;">
+							<div class="bg-sky-500 w-12 h-12 mr-2.5 rounded-full"></div>
+							<div class="w-full border-2  ml-2.5">
+								<div class="font-bold">${reply.writerName}</div>
+								<c:if test="${rq.getLoginedMemberId() == reply.memberId}">
+									<div class="flex">		
+										<a href="">수정</a>
+										<a href="../reply/doDelete?id=${reply.id }&relId=${article.id }"  onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
+									</div>
+								</c:if>
+								<div>${reply.getForPrintBody()}</div>
+								<div>${reply.updateDate}</div>
+							</div>
 						</div>
 					</c:forEach>
 					
@@ -140,7 +168,7 @@
 							<input type="hidden" name="relTypeCode" value="article"/>
 							<input type="hidden" name="relId" value="${article.id }"/>
 							<div class="mt-4 reply-border p-4">
-								<div class="mb-2"><span>닉네임</span></div>
+								<div class="mb-3"><span id="replyNickname" class="font-semibold"></span></div>
 								<textarea class="textarea textarea-bordered textarea-lg w-full" name="body" placeholder="댓글을 입력해보세요"></textarea>
 								<div class="flex justify-end"><button class="btn btn-active btn-sm">작성</button></div>
 							</div>
