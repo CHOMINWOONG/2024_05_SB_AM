@@ -72,6 +72,22 @@
 				}
 			})
 		}
+		
+		const replyModifyForm = function(){
+			
+			let addHtml = `
+				<form action="../reply/doWrite" method="post" onsubmit="replyForm_onSubmit(this); return false;">
+					<input type="hidden" name="relTypeCode" value="article"/>
+					<input type="hidden" name="relId" value="${article.id }"/>
+					<div class="mt-4 reply-border p-4">
+						<div class="mb-3"><span id="replyNickname" class="font-semibold"></span></div>
+						<textarea class="textarea textarea-bordered textarea-lg w-full" name="body" placeholder="댓글을 입력해보세요"></textarea>
+						<div class="flex justify-end"><button class="btn btn-active btn-sm">작성</button></div>
+					</div>
+				</form>
+			`;
+			
+		}
 	</script>
 	
 	<section class="mt-8 text-lg">
@@ -94,7 +110,7 @@
 							</c:if>
 							<c:if test="${rq.getLoginedMemberId() != 0 }">
 								<button id="likePointBtn" class="btn btn-sm btn-outline">
-								  좋아요
+								  <span id="likePointCnt">${article.likePoint }</span>
 								  <svg
 								    xmlns="http://www.w3.org/2000/svg"
 								    class="h-6 w-6"
@@ -109,7 +125,7 @@
 								  </svg>
 								</button>
 								&nbsp;&nbsp;
-								<span id="likePointCnt">${article.likePoint } 개</span>
+								
 							</c:if>
 						</td>
 					</tr>
@@ -150,15 +166,17 @@
 						<div style="display: flex; align-items: center; margin-bottom: 10px;">
 							<div class="bg-sky-500 w-12 h-12 mr-2.5 rounded-full"></div>
 							<div class="w-full border-2  ml-2.5">
-								<div class="font-bold">${reply.writerName}</div>
-								<c:if test="${rq.getLoginedMemberId() == reply.memberId}">
+								
 									<div class="flex">		
-										<a href="">수정</a>
-										<a href="../reply/doDelete?id=${reply.id }&relId=${article.id }"  onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
+										<div class="font-bold">${reply.writerName}</div>
+									<c:if test="${rq.getLoginedMemberId() == reply.memberId}">
+										<a class="text-border text-xs mt-2 ml-4 font-bold" href="">수정</a>
+										<a class="text-border text-xs mt-2 mx-2 font-bold" href="../reply/doDelete?id=${reply.id }&relId=${article.id }"  onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
+									</c:if>
 									</div>
-								</c:if>
+								
 								<div>${reply.getForPrintBody()}</div>
-								<div>${reply.updateDate}</div>
+								<div class="text-xs">${reply.updateDate}</div>
 							</div>
 						</div>
 					</c:forEach>
