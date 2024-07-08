@@ -24,16 +24,16 @@ public class UsrLikePointController {
 	public ResultData<Integer> getLikePoint(String relTypeCode, int relId) {
 		return likePointService.getLikePoint(rq.getLoginedMemberId(), relTypeCode, relId);
 	}
-	
+
 	@GetMapping("/usr/likePoint/doLikePoint")
 	@ResponseBody
 	public String doLikePoint(String relTypeCode, int relId, boolean likePointBtn) {
-		
+
 		if (likePointBtn) {
 			likePointService.deleteLikePoint(rq.getLoginedMemberId(), relTypeCode, relId);
 			return "좋아요 취소";
 		}
-		
+
 		likePointService.insertLikePoint(rq.getLoginedMemberId(), relTypeCode, relId);
 		return "좋아요 성공";
 	}

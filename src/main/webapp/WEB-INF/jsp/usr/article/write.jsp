@@ -4,31 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="ARTICLE WRITE" />
 <%@ include file="../../common/head.jsp" %>
-
-		<script>
-			const writeForm_onSubmit = function(form) {
-				form.title.value = form.title.value.trim();
-				form.body.value = form.body.value.trim();
-				
-				if (form.title.value.length == 0) {
-					alert('제목을 입력해주세요');
-					form.title.focus();
-					return;
-				}
-				
-				if (form.body.value.length == 0) {
-					alert('내용을 입력해주세요');
-					form.body.focus();
-					return;
-				}
-				
-				form.submit();
-			}
-		</script>
+<%@ include file="../../common/toastUiEditorLib.jsp" %>
 	
 		<section class="mt-8 text-lg">
 			<div class="container mx-auto px-3">
-				<form action="doWrite" method="post" onsubmit="writeForm_onSubmit(this); return false;">
+				<form action="doWrite" method="post" onsubmit="submitForm(this); return false;">
+					<input type="hidden" name="body"/>
 					<input type="hidden" name="id" value="${article.id }" />
 					<div class="table-box-type">
 						<tr>
@@ -56,12 +37,13 @@
 			          			<label class="label">
 			            			<span class="label-text">제목</span>
 			          			</label>
-			          	<input type="text" name="title" placeholder="제목을 입력해주세요" class="input input-bordered" required />
+			          	<input class="input input-bordered w-full" type="text" name="title" />
 			       		</div>	
 			       		<div class="form-control">
 			          		<label class="label">
 			            		<span class="label-text">내용</span>
 			          		</label>
+			          	<div class="toast-ui-editor"></div>
 		          		<input type="text" name="body" placeholder="내용을 입력해주세요" class="input input-bordered" required />
 		       			</div>
 					</div>
